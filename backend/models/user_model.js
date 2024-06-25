@@ -15,7 +15,19 @@ const userSchema = new Schema({
         type: String,
         required: [true, "Please enter a password"],
         minlength: [6, "Minimum password length is 6 characters"]
+    },
+
+    role: {
+        type: String,
+        enum: ['admin', 'user'],
+        default: 'user'
+    },
+
+    emailVerified: {
+        type: Boolean, 
+        default: false
     }
+    
 }, {timestamps: true});
 
 userSchema.pre('save', async function (next) {

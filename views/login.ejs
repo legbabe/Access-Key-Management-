@@ -70,7 +70,12 @@
                     passwordError.textContent = data.errors.password;
                 }
                 if (data.user) {
-                    location.assign('/personnel')
+                    // location.assign('/personnel')
+                    if(data.user === 'user'){
+                        location.replace('/personnel')
+                    } else if(data.user === 'admin') {
+                        location.replace('/dashboard')
+                    }
                 }
             } catch (err) {
                 console.log(err);

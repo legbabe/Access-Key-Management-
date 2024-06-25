@@ -37,21 +37,10 @@ app.get('/dashboard', (req, res) => {
     res.render('admin_home.ejs')
 })
 
- // trials of the model 
- app.get("/signup" , (req, res)=>{
-    const user = new User({
-        email: "example@google.com",
-        password: "123456"
-    });
+app.get('/generate_key', (req, res) => {
+    res.render('generate_key.ejs')
+}); 
 
-    user.save()
-        .then((result) => {
-            res.send(result)
-        })
-        .catch((err) => {
-            console.log(err);
-        })
- })
 
 // database connection
 const dbURI = 'mongodb+srv://danielajayi:danielajayi@access-key.lpymepu.mongodb.net/access-key?retryWrites=true&w=majority&appName=Access-key-management'

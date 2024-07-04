@@ -46,6 +46,4 @@ app.get('/generate_key', (req, res) => {
 const dbURI = 'mongodb+srv://danielajayi:danielajayi@access-key.lpymepu.mongodb.net/access-key?retryWrites=true&w=majority&appName=Access-key-management'
 mongoose.connect(dbURI).then(
     (result)=> app.listen(5000)
-    
-
 ).catch((error) => console.log(error))

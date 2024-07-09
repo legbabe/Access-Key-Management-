@@ -2,21 +2,32 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const tokenSchema = new Schema({
-    name: {
+    token: {
         type: String,
         required: true,
         length: 100,
         unique: true
     },
-    procurement: {
+    userEmail: {
         type: String,
         required: true,
-        length: 100
+    },
+    proc_date: {
+        type: Date,
+        default: Date.now,
+        
     },
     expiryDate: {
+        type: Date,
+        default: function() {
+            const currentDate = new Date();
+            return new Date(currentDate.setMonth(currentDate.getMonth() + 1));
+        },
+    },
+    tokenStatus: {
         type: String,
-        required: true,
-        length: 100
+        enum: ['active', 'expired', 'revoked'],
+        default: 'active'
     }
 });
 

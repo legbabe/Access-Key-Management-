@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const User = require('./models/user_model')
 const authRoutes = require('./routes/auth_routes')
+const keyRoutes = require('./routes/key_routes')
 const cookieParser = require('cookie-parser');
 const { Server } = require('https');
 const { requireAuth } = require('./middleware/authMiddleware');
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 })
 
 app.use(authRoutes)
+app.use(keyRoutes)
 
 app.get('/admin', (req, res) => {
     res.render('admin.ejs')

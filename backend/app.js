@@ -26,7 +26,7 @@ app.use(cookieParser())
 
 //All pages navigations
     app.get('/', (req, res) => {
-    res.render('index.ejs')
+    res.render('index')
 })
 
 app.use(authRoutes)

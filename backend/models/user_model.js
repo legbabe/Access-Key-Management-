@@ -26,27 +26,39 @@ const userSchema = new Schema({
     emailVerified: {
         type: Boolean, 
         default: false
-    }
+    },
+    passwordResetToken: {type: String},
+    passwordResetExpires: {type: Date}
     
 }, {timestamps: true});
 
-userSchema.pre('save', async function (next) {
-    const salt = await bcrypt.genSalt();
-    this.password = await bcrypt.hash(this.password, salt)
-    next();
-})
+// userSchema.pre('save', async function (next) {
+//     const salt = await bcrypt.genSalt();
+//     this.password = await bcrypt.hash(this.password, salt)
+//     next();
+// })
 
 //method to login user
 userSchema.statics.login = async function (email, password){
-    const user = await this.findOne({email});
-    if (user) {
-         const auth = await bcrypt.compare(password, user.password);
-         if (auth) {
-            return user;
-         }
-         throw Error('Incorrect password')
-    }
-    throw Error('Incorrect email')
+    const user = await this.findOne({email, emailVerified: true});
+    // console.log(password, user.password)
+    // console.log(user)
+    try {
+        if (!user) {
+          throw new Error('User not found');
+        }
+    
+        const auth = await bcrypt.compare(password, user.password);
+        if (auth) {
+          return user;
+        } 
+        throw new Error('Incorrect password!');
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+
+        
 }
 
 const User = mongoose.model('user', userSchema);

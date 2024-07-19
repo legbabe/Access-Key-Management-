@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="/script.js" defer></script>
     <title>Login | Access Key Management</title>
 </head>
@@ -11,30 +12,30 @@
     <div class="blur-bg-overlay"></div>
     <div class="form-popup">
         <a href="/">
-        <span class="close-btn material-symbols-rounded">close</span>
+            <span class="close-btn material-symbols-rounded"><i class="fa-solid fa-xmark red-icon"></i>
         </a>
         <div class="form-box login">
-            <div class="form-details">
-                <h2>Welcome Back</h2>
-                <p>Please log in using your personal information to stay connected with us.</p>
-            </div>
             <div class="form-content">
                 <h2>Log In | IT Personnel</h2>
                 <form action="#" method="post">
                     <div class="input-field">
-                        <input type="text" name="email" required>
                         <label>Email</label>
+                        <input type="text" name="email" required>
+                      
                     </div>
                     <br>
                     <div class="email error"></div>
                    <div class="input-field">
-                        <input type="password" name="password" required>
-                        <label>Password</label>
+                    <label>Password</label>
+                    <input type="password" name="password" required>
+                        
                     </div>
                     <br>
                     <div class="password error"></div>
-                    <br>
+                
                     <a href="/reset" class="forgot-pass-link">Forgot password?</a>
+                    <br>
+                    <br>
                     <button type="submit">Log In</button>
                 </form>
                 <div class="bottom-link">
@@ -64,7 +65,7 @@
                     headers: {'Content-Type': 'application/json'}
                 });
                 const data = await res.json();
-                console.log(data);
+                // console.log(data);
                 if (data.errors) {
                     emailError.textContent = data.errors.email;
                     passwordError.textContent = data.errors.password;
@@ -75,6 +76,8 @@
                         location.replace('/personnel')
                     } else if(data.user === 'admin') {
                         location.replace('/dashboard')
+                    } else {
+                        alert(data.vfyError)
                     }
                 }
             } catch (err) {

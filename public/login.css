@@ -1,154 +1,70 @@
-.form-popup .close-btn {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    color: #878484;
-    cursor: pointer;
-}
-
-.form-popup .form-box {
+body{
+    font-family: sans-serif;
+    margin: 0;
     display: flex;
-}
-
-/* error messages */
-.error{
-    color: red;
-}
-
-.form-box .form-details {
-    width: 100%;
-    color: #fff;
-    max-width: 330px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
 }
-
-.login .form-details {
-    padding: 0 40px;
-    background: url("images/login-img.jpg");
-    background-position: center;
-    background-size: cover;
+form{
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 400px;
 }
-
-.paragraph{
-    color: #00BCD4;
-    font-size: 15px;
-}
-
-#position{
-    padding: 10px;
-    /* margin: 20px; */
-}
-.form-box .form-content {
-    width: 100%;
-    padding: 35px;
-}
-
-.form-box h2 {
+h2{
     text-align: center;
-    margin-bottom: 29px;
+    margin-bottom: 20px;
 }
-
-form .input-field {
-    position: relative;
-    height: 50px;
+.input-cotainer{
+    margin-bottom: 20px;
+}
+label{
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+    padding-left: 6px;
+}
+input[type="text"]{
     width: 100%;
-    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px  ;
 }
-
-.input-field input {
-    height: 100%;
+input[type="password"]{
     width: 100%;
-    background: none;
-    outline: none;
-    font-size: 0.95rem;
-    padding: 0 15px;
-    border: 1px solid #717171;
-    border-radius: 3px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px  ;
 }
-
-.input-field input:focus {
-    border: 1px solid #00bcd4;
-}
-
-.input-field label {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    color: #4a4646;
-    pointer-events: none;
-    transition: 0.2s ease;
-}
-
-.input-field input:is(:focus, :valid) {
-    padding: 16px 15px 0;
-}
-
-.input-field input:is(:focus, :valid)~label {
-    transform: translateY(-120%);
-    color: #00bcd4;
-    font-size: 0.75rem;
-}
-
-.form-box a {
-    color: #00bcd4;
-    text-decoration: none;
-}
-
-.form-box a:hover {
-    text-decoration: underline;
-}
-
-form :where(.forgot-pass-link, .policy-text) {
-    display: inline-flex;
-    margin-top: 13px;
-    font-size: 0.95rem;
-}
-
-form button {
-    width: 100%;
+button{
+    width: 105%;
+    background-color: #28a745;
     color: #fff;
     border: none;
-    outline: none;
-    padding: 14px 0;
-    font-size: 1rem;
-    font-weight: 500;
-    border-radius: 3px;
+    border-radius: 10px;
+    padding: 10px 20px;
     cursor: pointer;
-    margin: 25px 0;
-    background: #00bcd4;
-    transition: 0.2s ease;
+    transition: all 0.3s ease-in-out;
+    font-weight: 600;
 }
-
-form button:hover {
-    background: #0097a7;
+button:hover{
+    background-color: #209e3c;
 }
-
-.form-content .bottom-link {
-    text-align: center;
+a{
+.red-icon{
+color: red;
+position: absolute;
+right: 450px;
+.signup-link{
+    color: #209e3c;
+}}}
+.bottom-link{
+font-family: italic;
+font-weight: 400;
 }
-
-.form-popup .signup,
-.form-popup.show-signup .login {
-    display: none;
-}
-
-.form-popup.show-signup .signup {
-    display: flex;
-}
-
-.signup .policy-text {
-    display: flex;
-    margin-top: 14px;
-    align-items: center;
-}
-
-.signup .policy-text input {
-    width: 14px;
-    height: 14px;
-    margin-right: 7px;
+a.forgot-pass-link{
+    font-size: 13px;
 }

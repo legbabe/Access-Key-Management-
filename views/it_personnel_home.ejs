@@ -17,7 +17,7 @@
                 <img src="images/logo.jpg" alt="logo">
                 <h2>Micro-Focus</h2>
             </a>
-            <form action="/create-key" method="post"><button>Create Access Key</button></form>
+            <form action="/create-key" method="post"><button class="btnd">Create Access Key</button></form>
             <a href="/logout">
             <button class="login-btn">LOG OUT</button>
             </a>
@@ -61,14 +61,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <% let count = 1; keys.forEach(key => { %>
                                     <tr>
-                                        <td>1</td>
-                                        <td>ffgdfxfffgvb5g</td>
-                                        <td ><span class="bg-success p-2 rounded">Active</span></td>
-                                        <td>12/12/12</td>
-                                        <td>2011/04/25</td>
+                                        <td><%= count %></td>
+                                        <td><%= key.token %></td>
+                                        <!-- <td ><span class="bg-success p-2 rounded"><%= key.tokenStatus %></span></td> -->
+                                        <td>
+                                            <% if (key.tokenStatus === 'revoked' || key.tokenStatus === 'expired') { %>
+                                                <span class="bg-danger p-2 rounded"><%= key.tokenStatus %></span>
+                                            <% } else if (key.tokenStatus === 'active') { %>
+                                                <span class="bg-success p-2 rounded"><%= key.tokenStatus %></span>
+                                            <% } else { %>
+                                                <span class="bg-secondary p-2 rounded"><%= key.tokenStatus %></span>
+                                            <% } %>
+                                        </td>
+                                        <td><%= key.procDate %></td>
+                                        <td><%= key.expireAt %></td>
                                     </tr>
-                                    <!-- Add more rows as needed -->
+                                    <% count++ }) %>
                                 </tbody>
                             </table>
                         </div>

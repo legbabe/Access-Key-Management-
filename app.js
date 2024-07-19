@@ -1,3 +1,4 @@
+require('dotenv').config()
 const dotenv = require('dotenv')
 const express = require('express');
 const path = require('path');
@@ -85,7 +86,7 @@ app.get('/generate_key', (req, res) => {
 
 
 // database connection
-const dbURI = "mongodb+srv://danielajayi:danielajayi@access-key.lpymepu.mongodb.net/access-key?retryWrites=true&w=majority&appName=Access-key-management"
+const dbURI = process.env.DB_STRING
 mongoose.connect(dbURI).then(
     (result)=> app.listen(5000)
 ).catch((error) => console.log(error))

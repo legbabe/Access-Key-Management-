@@ -1,34 +1,38 @@
+const dotenv = require('dotenv')
 const User = require('../models/user_model')
 const Key = require('../models/token_model')
 const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
 const bcrypt = require('bcrypt')
-const JWT_SECRET = "poiuytrkjhg"
+const JWT_SECRET = process.env.JWT_SECRET;
 
 //email sending
+// var transport = nodemailer.createTransport({
+//     host: "sandbox.smtp.mailtrap.io",
+//     port: 2525,
+//     auth: {
+//       user: "bf8d00d8368eff",
+//       pass: "311c8922a24b12"
+//     }
+// });
+
 var transport = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
+    host: "smtp.gmail.com",
+    port: 465,
     auth: {
-      user: "bf8d00d8368eff",
-      pass: "311c8922a24b12"
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS
     }
   });
 
-// var transport = nodemailer.createTransport({
-//     host: "smtp.gmail.com",
-//     port: 465,
-//     auth: {
-//       user: "danielajayi100@gmail.com",
-//       pass: "gyahimlbymdzjcf"
-//     }
-//   });
+  
 
 
-
-
-function sendVerificationEmail(email, emailToken) {
-    const url = `http://localhost:5000/verify/${emailToken}`;
+function sendVerificationEmail(email, emailToken, req) {
+    const rootUrl = `${req.protocol}://${req.get('host')}`
+    const authUrl = `/verify/${emailToken}`
+    const url = rootUrl+authUrl
+    
     
     transport.sendMail({
         to: email,
@@ -108,7 +112,7 @@ module.exports.signup_post = async (req, res) => {
 
         // Send verification email
          console.log(user[0].email)
-        sendVerificationEmail(user[0].email, emailToken)
+        sendVerificationEmail(user[0].email, emailToken, req)
         // console.log(user._id)
 
         const token = createToken(user[0]._id);
@@ -173,8 +177,10 @@ module.exports.logout_get = (req, res) => {
 
 
     //send password reset email
-    function sendPasswordResetEmail(user, token) {
-        const url = `http://localhost:5000/resetPassword/${token}`;
+    function sendPasswordResetEmail(user, token, req) {
+        const rootUrl = `${req.protocol}://${req.get('host')}`
+        const authUrl = `/resetPassword/${token}`;
+        const url = rootUrl+authUrl
         
         transport.sendMail({
             to: user.email,
@@ -198,7 +204,7 @@ module.exports.reset_post = async (req, res) => {
             user.passwordResetExpires = Date.now() + 43200000; // 12 hours
             await user.save();
 
-            sendPasswordResetEmail(user, token);
+            sendPasswordResetEmail(user, token, req);
             console.log('Password reset email sent')
             return res.send(`<script>alert('Password reset email sent! Please check your inbox.'); location.replace('/');</script>`)
 }

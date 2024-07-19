@@ -30,7 +30,7 @@ const key_gen = async (req, res) => {
     if(!userExists){
 
         const saveToken = await token.save()
-        return res.send("<script>alert('Your access key has been successfully created!'); window.history.back();</script>")
+        return res.send("<script>alert('Your access key has been successfully created!'); location.replace('/personnel'); </script>")
         } 
 
     const tokens = await Token.find({userEmail:user.email})
@@ -48,7 +48,7 @@ const key_gen = async (req, res) => {
     const check = arr.includes('active');
 
     if(check){
-        res.send("<script>alert('Sorry! You already have an active access key...'); window.history.back();</script>")
+        res.send("<script>alert('Sorry! You already have an active access key...'); location.replace('/personnel');</script>")
     } else {
         const saveToken = await token.save()
         return res.send("<script>alert('Your access key has been successfully created!'); location.replace('/personnel');</script>")

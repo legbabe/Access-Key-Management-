@@ -2,13 +2,13 @@ const dotenv = require('dotenv')
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const User = require('./models/user_model')
-const Key = require('./models/token_model')
-const authRoutes = require('./routes/auth_routes')
-const keyRoutes = require('./routes/key_routes')
+const User = require('./backend/models/user_model')
+const Key = require('./backend/models/token_model')
+const authRoutes = require('./backend/routes/auth_routes')
+const keyRoutes = require('./backend/routes/key_routes')
 const cookieParser = require('cookie-parser');
 const { Server } = require('https');
-const { requireAuth } = require('./middleware/authMiddleware');
+const { requireAuth } = require('./backend/middleware/authMiddleware');
 const moment = require('moment')
 
 

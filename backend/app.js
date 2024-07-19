@@ -16,9 +16,12 @@ const app = express();
 
 app.use(express.urlencoded({extended: false}))
 
-//setting ejs
-app.set("views", join(__dirname, "views"));
+// //setting ejs
+// const filePath = path.join(__dirname, 'views.ejs');
+app.set("views", "views");
 app.set('view engine', 'ejs');
+
+console.log(__dirname)
 
 //adding static middleware
 app.use(express.static('public'));

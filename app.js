@@ -23,7 +23,7 @@ app.set('view engine', 'ejs');
 console.log(__dirname)
 
 //adding static middleware
-app.use(express.static('public'));
+app.use(express.static(__dirname +'/public'));
 app.use(express.json());
 app.use(cookieParser())
 

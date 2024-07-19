@@ -17,6 +17,7 @@ const app = express();
 app.use(express.urlencoded({extended: false}))
 
 //setting ejs
+app.set("views", join(__dirname, "views"));
 app.set('view engine', 'ejs');
 
 //adding static middleware

@@ -6,16 +6,7 @@ const nodemailer = require('nodemailer')
 const bcrypt = require('bcrypt')
 const JWT_SECRET = process.env.JWT_SECRET;
 
-//email sending
-// var transport = nodemailer.createTransport({
-//     host: "sandbox.smtp.mailtrap.io",
-//     port: 2525,
-//     auth: {
-//       user: "bf8d00d8368eff",
-//       pass: "311c8922a24b12"
-//     }
-// });
-
+// mail handler
 var transport = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -26,8 +17,6 @@ var transport = nodemailer.createTransport({
   });
 
   
-
-
 function sendVerificationEmail(email, emailToken, req) {
     const rootUrl = `${req.protocol}://${req.get('host')}`
     const authUrl = `/verify/${emailToken}`
@@ -155,9 +144,7 @@ module.exports.login_post = async (req, res) => {
     try {
 
        const user = await User.login(email, password);
-    //    if(!user){
-    //     res.send("<script>alert('Incorrect Email or Password!'); location.href='/login';</script>")
-    //    }
+    
        const token = createToken(user._id);
        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000})
        res.cookie('user_id', user._id, {httpOnly: true, maxAge: maxAge * 1000}  )

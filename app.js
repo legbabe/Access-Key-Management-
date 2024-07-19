@@ -21,8 +21,6 @@ app.use(express.urlencoded({extended: false}))
 app.set("views", __dirname + "/views");
 app.set('view engine', 'ejs');
 
-console.log(__dirname)
-
 //adding static middleware
 app.use(express.static(__dirname +'/public'));
 app.use(express.json());
@@ -35,22 +33,16 @@ app.use(cookieParser())
 
 app.use(authRoutes)
 app.use(keyRoutes)
-// app.use(otherRoutes)
-
-app.get('/admin', (req, res) => {
-    res.render('admin.ejs')
-})
-
 
 
 app.get('/personnel', requireAuth, async (req, res) => {
 try{
     const user_id = req.cookies.user_id
-    // console.log(user_id)
+    
     const user = await User.findOne({_id: user_id})
-    // console.log(user)
+    
     const keys = await Key.find({userEmail: user.email})
-    // console.log(keys)
+   
 
     keys.forEach(key => {
         key.procDate = moment(key.proc_date).format('MMMM Do YYYY, h:mm:ss a');

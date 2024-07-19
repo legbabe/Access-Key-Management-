@@ -1,40 +1,25 @@
-Access Key Manager
-This repository contains an access key manager for a multitenant school management software, built with NodeJS, Express, and MongoDB.
+# Access Key Manager
 
-Live URL
-Coming soon...
+## Project Objective
+Micro-Focus Inc., a software company, has built a school management platform that is multitenant, allowing various schools to set up on the platform as though it was built specifically for them. Instead of building payment features into the school software, they have decided to use an access key-based approach to monetize it. They have outsourced the project to build a key manager, a web application that schools can use to purchase access keys to activate their school accounts.
 
-Features Implemented
-Admin
-Login with email and password
-Revoke a user's password
-See all keys generated on the platform (active, expired, revoked)
-Retrieve a school's active access key using school email
-IT Personnel
-Signup and login using email and password
-Verify account after signing up
-Reset account password
-Generate new active key if no active key is available
-See all keys granted to user on the platform (active, expired, revoked)
-See details of each key (status, date of procurement, expiry date)
-Getting Started
-1. Clone the project
-Edit
-Copy code
-git clone #####
-2. Change to project directory
-Edit
-Copy code
-cd Access-key-manager/
-3. Set up environment variables in env file
-4. Install the various packages used in project
-Edit
-Copy code
-npm install
-5. Start server
-Edit
-Copy code
-nodemon app.js
-ER Diagram
+## Customer Requirements
 
+### School IT Personnel
+1. Should be able to sign up and log in with an email and password, with account verification.
+2. There should be a reset password feature to recover lost passwords.
+3. Should be able to see a list of all access keys granted: active, expired, or revoked.
+4. For each access key, the personnel should be able to see the status, date of procurement, and expiry date.
+5. A user should not be able to get a new key if there is an active key already assigned to him/her. Only one key can be active at a time.
 
+### Micro-Focus Admin
+1. Should be able to log in with an email and password.
+2. Should be able to manually revoke a key.
+3. Should be able to see all keys generated on the platform and see the status, date of procurement, and expiry date.
+4. Should be able to access an endpoint, such that if the school email is provided, the endpoint should return status code 200 and details of the active key if any is found, else it should return 404. This is to enable them to integrate their school software with the key manager.
+
+## Deliverables
+- Web application source code (GitHub - implement Git flow with a reasonable number of commits including a well-written README file)
+- ![(/home/sherlock/Desktop/Amalitech/Access-Key-Management-/ER-Diagram.png)]
+## Deployed link
+- (access-key-management.vercel.app)

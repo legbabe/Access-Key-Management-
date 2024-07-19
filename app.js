@@ -17,8 +17,7 @@ const app = express();
 app.use(express.urlencoded({extended: false}))
 
 // //setting ejs
-// const filePath = path.join(__dirname, 'views.ejs');
-app.set("views", "views");
+app.set("views", __dirname + "/views");
 app.set('view engine', 'ejs');
 
 console.log(__dirname)
@@ -30,7 +29,7 @@ app.use(cookieParser())
 
 //All pages navigations
     app.get('/', (req, res) => {
-    res.render('index.ejs')
+    res.render('index')
 })
 
 app.use(authRoutes)

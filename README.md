@@ -20,6 +20,6 @@ Micro-Focus Inc., a software company, has built a school management platform tha
 
 ## Deliverables
 - Web application source code (GitHub - implement Git flow with a reasonable number of commits including a well-written README file)
-- ![](/home/sherlock/Desktop/Amalitech/Access-Key-Management-/ER-Diagram.png)
+- ![](./Access-Key-Management-/ER-Diagram.png)
 ## Deployed link
 - [(access-key-management.vercel.app)](https://access-key-management.vercel.app/)

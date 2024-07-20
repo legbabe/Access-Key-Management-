@@ -1,5 +1,12 @@
 # Access Key Manager
 
+## Admin Log in credentials 
+email: admin@micro.com
+password: admin
+
+## Accessing access key endpoint with email
+http://localhost:5000/getActiveKey/email
+
 ## Project Objective
 Micro-Focus Inc., a software company, has built a school management platform that is multitenant, allowing various schools to set up on the platform as though it was built specifically for them. Instead of building payment features into the school software, they have decided to use an access key-based approach to monetize it. They have outsourced the project to build a key manager, a web application that schools can use to purchase access keys to activate their school accounts.
 

@@ -35,28 +35,30 @@ const handleErrors = (err) => {
     console.log(err.message, err.code);
     let errors = {email: '', password: ''};
 
-    //incorect email && password
+    // Incorrect email and password
     if (err.message === 'Incorrect email') {
-        errors.email = 'That email is not registered'
+        errors.email = 'That email is not registered';
     }
 
     if (err.message === 'Incorrect password') {
-        errors.password = 'Password is wrong... try again'
+        errors.password = 'Password is wrong... try again';
     }
 
-    // duplicate error of email address
-    if (err.code === 11000){
-        errors.email = 'Email is already in use..'
-        return errors;    
+    // Duplicate email error
+    if (err.code === 11000) {
+        errors.email = 'Email is already in use..';
+        return errors;
     }
 
-    if(err.message.includes('user validation failed')){
-       Object.values(err.errors).forEach(({properties}) => {
-            errors[properties.path] = properties.message
-       })
+    // Validation errors
+    if (err.message.includes('user validation failed')) {
+        Object.values(err.errors).forEach(({properties}) => {
+            errors[properties.path] = properties.message;
+        });
     }
-  return errors;
+    return errors;
 }
+
 
 //jwt cookies functions
 const maxAge = 1 * 24 * 60 * 60;

@@ -62,6 +62,7 @@
                     const data = await res.json();
         
                     if (data.errors) {
+                        console.log(data);
                         if (data.errors.email) {
                             emailError.textContent = data.errors.email;
                         }

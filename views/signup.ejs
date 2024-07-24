@@ -41,42 +41,67 @@
 
     <script>
         const form = document.querySelector('form');
-        const emailError = document.querySelector('.email.error');
-        const passwordError = document.querySelector('.password.error');
-    
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            emailError.textContent = '';
-            passwordError.textContent = '';
+const emailError = document.querySelector('.email.error');
+const passwordError = document.querySelector('.password.error');
 
-            const email = form.email.value;
-            const password = form.password.value;
-    
-            try {
-                const res = await fetch('/signup', {
-                    method: 'POST',
-                    body: JSON.stringify({email, password}),
-                    headers: {'Content-Type': 'application/json'}
-                });
-                const data = await res.json();
-    
-                if (data.errors) {
-                    if (data.errors.email) {
-                        emailError.textContent = data.errors.email;
-                    }
-                    if (data.errors.password) {
-                        passwordError.textContent = data.errors.password;
-                    }
-                }
-    
-                if (data.user) {
-                    alert('Registration Successful. Check your email to verify');
-                    location.assign('/login');
-                }
-            } catch (err) {
-                console.error(err);
-            }
-        });
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  emailError.textContent = '';
+  passwordError.textContent = '';
+
+  const email = form.email.value;
+  const password = form.password.value;
+
+  // Password strength validation
+  const passwordStrengthError = validatePasswordStrength(password);
+  if (passwordStrengthError) {
+    passwordError.textContent = passwordStrengthError;
+    return;
+  }
+
+  try {
+    const res = await fetch('/signup', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const data = await res.json();
+
+    if (data.errors) {
+      if (data.errors.email) {
+        emailError.textContent = data.errors.email;
+      }
+      if (data.errors.password) {
+        passwordError.textContent = data.errors.password;
+      }
+    }
+
+    if (data.user) {
+      alert('Registration Successful. Check your email to verify');
+      location.assign('/login');
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+// Password strength validation function
+function validatePasswordStrength(password) {
+  const errors = [];
+
+  if (password.length < 8) {
+    errors.push('Password must be at least 8 characters long');
+  }
+
+  if (!/[a-z]/.test(password)) {
+    errors.push('Password must contain at least one lowercase letter');
+  }
+
+  if (!/[A-Z]/.test(password)) {
+    errors.push('Password must contain at least one uppercase letter');
+  }
+  return errors.join(', ');
+}
     </script>
 </body>
 </html>

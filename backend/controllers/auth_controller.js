@@ -32,7 +32,7 @@ function sendVerificationEmail(email, emailToken, req) {
 
 // form error handling
 const handleErrors = (err) => {
-    console.log(err.message, err.code);
+    // console.log(err.message, err.code);
     let errors = {email: '', password: ''};
 
     // Incorrect email and password

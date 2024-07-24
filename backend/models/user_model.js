@@ -13,8 +13,7 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: [true, "Please enter a password"],
-        minlength: [6, "Minimum password length is 6 characters"]
+        required: [true, "Please enter a password"]
     },
 
     role: {
@@ -37,22 +36,16 @@ const userSchema = new Schema({
 userSchema.statics.login = async function (email, password){
     const user = await this.findOne({email, emailVerified: true});
     
-    try {
-        if (!user) {
-          throw new Error('User not found');
+    if (!user) {
+      throw Error('Incorrect email');
         }
-    
-        const auth = await bcrypt.compare(password, user.password);
-        if (auth) {
-          return user;
-        } 
-        throw new Error('Incorrect password!');
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
-
-        
+    else{
+      const auth = await bcrypt.compare(password, user.password);
+      if (auth) {
+        return user;
+      } 
+      throw Error('Incorrect password');
+    }
 }
 
 const User = mongoose.model('user', userSchema);
